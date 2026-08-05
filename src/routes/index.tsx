@@ -1,24 +1,58 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { ArrowDown, ArrowRight, Braces, Check, ChevronRight, CircleCheck, Code2, FileText, Github, GitPullRequest, ShieldCheck, Sparkles, Star, Zap } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
+  head: () => ({ meta: [
+    { title: "Refril — Review Referral Candidates" },
+    { name: "description", content: "Review referral candidates with AI insights, coding profiles, and referral risk in under two minutes." },
+    { property: "og:title", content: "Refril — Review Referral Candidates" },
+    { property: "og:description", content: "Everything you need to make confident engineering referrals in one profile." },
+    { property: "og:type", content: "website" },
+    { name: "twitter:card", content: "summary_large_image" },
+  ]}),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
-  return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
+const signals = ["Resume", "GitHub", "LeetCode", "Codeforces", "LinkedIn", "Projects", "Experience", "AI Insights"];
+
+function Logo() {
+  return <a href="#top" className="inline-flex items-center gap-2 font-display text-base font-semibold text-foreground"><span className="grid size-7 place-items-center rounded-md border border-primary/40 bg-primary/10 text-primary"><GitPullRequest className="size-4" /></span>Refril</a>;
+}
+
+function RiskBadge() {
+  return <span className="inline-flex items-center gap-1.5 rounded-full border border-success/25 bg-success/10 px-2.5 py-1 text-xs font-medium text-success"><span className="size-1.5 rounded-full bg-success" /> Low referral risk</span>;
+}
+
+function CandidateProfile({ compact = false }: { compact?: boolean }) {
+  return <article className="overflow-hidden rounded-lg border border-border bg-card shadow-product">
+    <header className="flex items-center justify-between border-b border-border bg-surface-subtle px-4 py-3 sm:px-5"><div className="flex items-center gap-2 text-xs text-muted-foreground"><span className="size-2 rounded-full bg-success" /> Candidate profile</div><span className="font-mono text-[11px] text-muted-foreground">REQ-284</span></header>
+    <div className={compact ? "p-4" : "p-5 sm:p-6"}>
+      <div className="flex flex-wrap items-start justify-between gap-4"><div className="flex items-center gap-3"><div className="grid size-10 place-items-center rounded-md bg-accent text-sm font-semibold text-accent-foreground">HL</div><div><h3 className="text-base font-semibold">Het Lathiya</h3><p className="mt-0.5 text-xs text-muted-foreground">Backend Engineer · Bengaluru</p></div></div><div className="text-right"><div className="font-display text-3xl font-semibold text-primary">91%</div><div className="text-[11px] text-muted-foreground">role match</div></div></div>
+      <div className="mt-5 flex flex-wrap gap-2"><RiskBadge /><span className="rounded-full border border-border bg-secondary px-2.5 py-1 text-xs text-secondary-foreground">Strong backend</span></div>
+      <div className="mt-5 grid grid-cols-3 divide-x divide-border rounded-md border border-border bg-surface-subtle py-3 text-center"><div><strong className="block text-sm">1111</strong><span className="text-[11px] text-muted-foreground">LeetCode</span></div><div><strong className="block text-sm">Expert</strong><span className="text-[11px] text-muted-foreground">Codeforces</span></div><div><strong className="block text-sm">167</strong><span className="text-[11px] text-muted-foreground">Repositories</span></div></div>
+      {!compact && <div className="mt-5 rounded-md border border-primary/20 bg-primary/5 p-4"><div className="flex items-center gap-2 text-xs font-medium text-primary"><Sparkles className="size-3.5" /> AI summary</div><p className="mt-2 text-sm leading-6 text-secondary-foreground">Strong DSA fundamentals, credible project depth, and consistently active GitHub contributions. Experience aligns well with backend platform work.</p></div>}
+      <div className="mt-5 flex items-center justify-between gap-3"><div className="flex items-center gap-3 text-muted-foreground"><Github className="size-4" /><Code2 className="size-4" /><FileText className="size-4" /></div><Button variant="product" size="sm">Refer candidate <ArrowRight /></Button></div>
     </div>
-  );
+  </article>;
+}
+
+function Index() {
+  return <main id="top" className="min-h-screen overflow-hidden bg-background text-foreground">
+    <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between border-x border-border px-5 sm:px-8"><Logo /><a href="#product" className="text-sm text-muted-foreground transition-colors hover:text-foreground">See the product</a></nav>
+    <section className="product-grid border-y border-border"><div className="mx-auto grid max-w-7xl lg:grid-cols-2">
+      <div className="flex min-h-[540px] flex-col justify-center border-x border-border px-6 py-20 sm:px-10 lg:border-r-0 lg:px-14"><div className="mb-7 inline-flex w-fit items-center gap-2 rounded-full border border-border bg-card px-3 py-1.5 text-xs text-muted-foreground"><Zap className="size-3.5 text-primary" /> Candidate review for engineers</div><h1 className="max-w-xl text-5xl font-semibold leading-[1.04] sm:text-6xl">Review candidates,<br /><span className="text-muted-foreground">not random resumes.</span></h1><p className="mt-6 max-w-xl text-base leading-7 text-muted-foreground sm:text-lg">Every referral request includes AI insights, coding profiles, and a Referral Risk score—so you can decide confidently in under 2 minutes.</p><div className="mt-8"><Button variant="hero" size="lg" asChild><a href="#product">Become a Referrer <ArrowRight /></a></Button></div></div>
+      <div className="relative flex min-h-[540px] items-center border-x border-t border-border bg-surface-subtle p-5 sm:p-10 lg:border-t-0"><div className="absolute left-8 top-7 flex items-center gap-2 text-[11px] text-muted-foreground"><span className="size-2 rounded-full bg-primary" /> LIVE PROFILE</div><div className="w-full translate-y-4"><CandidateProfile /></div></div>
+    </div></section>
+    <section id="product" className="border-b border-border py-24 sm:py-32"><div className="mx-auto max-w-7xl px-5 sm:px-8"><div className="mb-10 flex flex-col justify-between gap-4 sm:flex-row sm:items-end"><div><p className="text-sm font-medium text-primary">THE PRODUCT</p><h2 className="mt-3 text-3xl font-semibold sm:text-4xl">Everything relevant. One decision.</h2></div><p className="max-w-sm text-sm leading-6 text-muted-foreground">No context switching. No profile hunting. Review the complete technical picture in one place.</p></div><div className="rounded-lg border border-line-bright bg-surface-subtle p-3 shadow-product sm:p-8"><CandidateProfile /></div></div></section>
+    <section className="border-b border-border py-24"><div className="mx-auto max-w-6xl px-5 sm:px-8"><div className="mb-12 max-w-xl"><p className="text-sm font-medium text-primary">BEFORE / AFTER</p><h2 className="mt-3 text-3xl font-semibold sm:text-4xl">Less searching. Better judgment.</h2></div><div className="grid overflow-hidden rounded-lg border border-border bg-card md:grid-cols-2">
+      <div className="border-b border-border p-7 md:border-b-0 md:border-r sm:p-10"><p className="mb-7 text-xs font-medium text-muted-foreground">WITHOUT REFRIL</p>{["Resume", "LinkedIn", "GitHub", "LeetCode", "Projects", "Portfolio", "Decision"].map((item, i, arr) => <div key={item} className="flex flex-col"><div className="flex h-11 items-center justify-between border-b border-border text-sm"><span>{item}</span><span className="text-muted-foreground">0{i + 1}</span></div>{i < arr.length - 1 && <ArrowDown className="my-2 size-3 self-center text-muted-foreground" />}</div>)}</div>
+      <div className="bg-surface-subtle p-7 sm:p-10"><p className="mb-7 text-xs font-medium text-primary">WITH REFRIL</p>{["One complete profile", "AI summary", "Risk score", "Technical signals", "Decision"].map((item, i, arr) => <div key={item} className="flex flex-col"><div className="flex h-14 items-center gap-3 rounded-md border border-border bg-card px-4 text-sm"><CircleCheck className="size-4 text-primary" />{item}</div>{i < arr.length - 1 && <ArrowDown className="my-2 size-3 self-center text-primary" />}</div>)}</div>
+    </div></div></section>
+    <section className="border-b border-border"><div className="mx-auto grid max-w-7xl border-x border-border md:grid-cols-3">{[{ icon: Zap, title: "Review in under 2 minutes", body: "The complete signal set, structured for a fast decision." },{ icon: ShieldCheck, title: "Know more before you refer", body: "Understand quality and risk before your name is attached." },{ icon: Braces, title: "Everything in one place", body: "Technical, professional, and AI context in a single profile." }].map(({ icon: Icon, title, body }, i) => <div key={title} className={`min-h-60 p-8 sm:p-10 ${i < 2 ? "border-b border-border md:border-b-0 md:border-r" : ""}`}><Icon className="size-5 text-primary" /><h3 className="mt-10 text-xl font-semibold">{title}</h3><p className="mt-3 text-sm leading-6 text-muted-foreground">{body}</p></div>)}</div></section>
+    <section className="border-b border-border py-24"><div className="mx-auto grid max-w-7xl gap-12 px-5 sm:px-8 lg:grid-cols-[0.75fr_1.25fr] lg:items-center"><div><p className="text-sm font-medium text-primary">REQUESTS DASHBOARD</p><h2 className="mt-3 text-3xl font-semibold sm:text-4xl">Know what deserves your attention.</h2><p className="mt-5 max-w-md text-base leading-7 text-muted-foreground">Requests arrive ranked with the context that matters, so strong candidates surface immediately.</p></div><div className="overflow-hidden rounded-lg border border-border bg-card shadow-product"><div className="flex items-center justify-between border-b border-border px-5 py-4"><h3 className="text-sm font-medium">Referral requests</h3><span className="text-xs text-muted-foreground">6 pending</span></div>{[{name:"Het Lathiya",role:"Backend",lang:"Python",score:"91%"},{name:"Aarav Shah",role:"Platform",lang:"Go",score:"87%"},{name:"Maya Chen",role:"Frontend",lang:"TypeScript",score:"84%"}].map((row, i) => <div key={row.name} className={`grid grid-cols-[1fr_auto] items-center gap-4 p-4 sm:grid-cols-[1.3fr_.8fr_.7fr_.5fr_auto] ${i < 2 ? "border-b border-border" : ""}`}><div className="flex items-center gap-3"><div className="grid size-8 place-items-center rounded-md bg-secondary text-xs font-semibold">{row.name.split(" ").map(x=>x[0]).join("")}</div><span className="text-sm font-medium">{row.name}</span></div><span className="hidden text-xs text-muted-foreground sm:block">{row.role}</span><span className="hidden text-xs text-muted-foreground sm:block">{row.lang}</span><strong className="text-sm text-primary">{row.score}</strong><ChevronRight className="hidden size-4 text-muted-foreground sm:block" /></div>)}</div></div></section>
+    <section className="border-b border-border py-24"><div className="mx-auto max-w-6xl px-5 sm:px-8"><div className="mb-12 text-center"><p className="text-sm font-medium text-primary">HOW IT WORKS</p><h2 className="mt-3 text-3xl font-semibold">From request to referral.</h2></div><div className="grid md:grid-cols-4">{["Candidate uploads", "AI analyzes", "You review", "Refer if you want"].map((item, i) => <div key={item} className="relative border-l border-border px-6 py-8"><span className="font-mono text-xs text-primary">0{i+1}</span><h3 className="mt-10 text-lg font-semibold">{item}</h3>{i < 3 && <ArrowRight className="absolute -right-2 top-9 z-10 hidden size-4 text-muted-foreground md:block" />}</div>)}</div></div></section>
+    <section className="border-b border-border bg-surface-subtle py-24"><div className="mx-auto max-w-6xl px-5 sm:px-8"><div className="grid gap-12 lg:grid-cols-[.8fr_1.2fr]"><div><p className="text-sm font-medium text-primary">BUILT FROM REAL SIGNALS</p><h2 className="mt-3 text-3xl font-semibold sm:text-4xl">Every profile combines the full picture.</h2><p className="mt-5 text-sm leading-6 text-muted-foreground">15+ technical and professional signals analyzed for each candidate.</p></div><div className="grid grid-cols-2 border-l border-t border-border sm:grid-cols-4">{signals.map((signal) => <div key={signal} className="flex h-28 items-center gap-2 border-b border-r border-border p-4 text-sm"><Check className="size-4 text-success" />{signal}</div>)}</div></div></div></section>
+    <footer className="product-grid"><div className="mx-auto max-w-7xl border-x border-border px-6 py-24 text-center"><Star className="mx-auto size-5 text-primary" /><h2 className="mt-6 text-4xl font-semibold sm:text-5xl">Your referral is valuable.<br /><span className="text-muted-foreground">Use it wisely.</span></h2><div className="mt-8"><Button variant="hero" size="lg">Become a Referrer <ArrowRight /></Button></div><div className="mt-24 flex items-center justify-between border-t border-border pt-6"><Logo /><span className="text-xs text-muted-foreground">© 2026 Refril</span></div></div></footer>
+  </main>;
 }
