@@ -7,7 +7,7 @@ export const Route = createFileRoute("/")({
     { title: "Refril — Review Referral Candidates" },
     { name: "description", content: "Review referral candidates with AI insights, coding profiles, and referral risk in under two minutes." },
     { property: "og:title", content: "Refril — Review Referral Candidates" },
-    { property: "og:description", content: "Everything you need to make confident engineering referrals in one profile." },
+    { property: "og:description", content: "Review referral candidates with AI insights, coding profiles, and referral risk in under two minutes." },
     { property: "og:type", content: "website" },
     { name: "twitter:card", content: "summary_large_image" },
   ]}),

@@ -77,14 +77,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Refril" },
-      { name: "description", content: "Review referral candidates with complete technical context." },
+      { title: "Refril — Review Referral Candidates" },
+      { name: "description", content: "Review referral candidates with AI insights, coding profiles, and referral risk in under two minutes." },
       { name: "author", content: "Refril" },
-      { property: "og:title", content: "Refril" },
-      { property: "og:description", content: "Review referral candidates with complete technical context." },
+      { property: "og:title", content: "Refril — Review Referral Candidates" },
+      { property: "og:description", content: "Review referral candidates with AI insights, coding profiles, and referral risk in under two minutes." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: "Refril — Review Referral Candidates" },
+      { name: "twitter:description", content: "Review referral candidates with AI insights, coding profiles, and referral risk in under two minutes." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/719c49b6-87fb-490e-92e9-a0702cbc6460/id-preview-3025a32a--cc6bfc5d-9779-4013-b1ea-31b964e30421.lovable.app-1785902839290.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/719c49b6-87fb-490e-92e9-a0702cbc6460/id-preview-3025a32a--cc6bfc5d-9779-4013-b1ea-31b964e30421.lovable.app-1785902839290.png" },
     ],
     links: [
       {
